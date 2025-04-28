@@ -1,0 +1,6 @@
+services:
+  sqlite-db:
+    image: nouchka/sqlite3
+    container_name: sqlite-container
+    volumes:
+      - ./db:/db  # O banco de dados ficará na pasta local './db' # Exemplo de porta, você pode usar conforme sua necessidade
