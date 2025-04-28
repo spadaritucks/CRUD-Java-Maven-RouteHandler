@@ -1,7 +1,5 @@
 package com.crud.http;
 import java.net.InetSocketAddress;
-
-import com.crud.controllers.UsersController;
 import com.crud.routes.UsersHandler;
 import com.sun.net.httpserver.HttpServer;
 

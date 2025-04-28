@@ -8,13 +8,15 @@ import com.crud.dtos.UserDTO;
 
 public class UsersRepository {
 
-    private Connection connection =  Database.getConnection();;
+    private Connection connection;
 
-   
+    public UsersRepository() {
+        connection = Database.getConnection();
+    }
 
     public void insertUser(UserDTO user) {
         try {
-            String query = "INSERT INTO tab_cadastro(nome, idade) VALUES (?,?)";
+            String query = "INSERT INTO users(name, age) VALUES (?,?)";
 
             PreparedStatement pst = connection.prepareStatement(query);
             pst.setString(1, user.getName());
