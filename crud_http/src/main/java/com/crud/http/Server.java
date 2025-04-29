@@ -9,7 +9,7 @@ public class Server {
     private Integer port = 8080;
     
     public Server() throws Exception {
-
+        
         try{
             server = HttpServer.create(new InetSocketAddress(port), 0);
 

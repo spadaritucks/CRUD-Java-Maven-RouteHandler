@@ -18,7 +18,7 @@ public class UsersRepository {
         connection = Database.getConnection();
     }
 
-    public void insertUser(UserDTO user) {
+    public String insertUser(UserDTO user) {
         try {
             String query = "INSERT INTO users(name, age) VALUES (?,?)";
 
@@ -27,7 +27,7 @@ public class UsersRepository {
             pst.setInt(2, user.getAge());
             pst.execute();
 
-            System.out.println("Usuário inserido com sucesso");
+            return "Usuario Criado com Sucesso";
 
         } catch (SQLException e) {
             System.out.println("Erro ao inserir usuário: " + e.getMessage());
@@ -35,8 +35,8 @@ public class UsersRepository {
         }
     }
 
-    public List<User> getAllUsers () {
-        try{
+    public List<User> getAllUsers() {
+        try {
             String query = "SELECT * FROM users";
             PreparedStatement pst = connection.prepareStatement(query);
             ResultSet result = pst.executeQuery();
@@ -49,10 +49,26 @@ public class UsersRepository {
                 list.add(user);
             }
             return list;
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println("Erro ao inserir usuario " + e.getMessage());
             throw new RuntimeException("Erro ao inserir usuario no banco de dados ", e);
+        }
+    }
+    public String deleteUser(String id) {
+        try {
+            int idTranformed;
+            String query = "DELETE FROM users WHERE id = ?";
+            PreparedStatement pst = connection.prepareStatement(query);
+            idTranformed = Integer.parseInt(id);
+            pst.setInt(1, idTranformed);
+            pst.execute();
+
+            return "Usuario Deletado com sucesso";
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao deletar o usuario " + e.getMessage());
+            throw new RuntimeException("Erro ao deletar o usuario do banco de dados ", e);
         }
     }
 }

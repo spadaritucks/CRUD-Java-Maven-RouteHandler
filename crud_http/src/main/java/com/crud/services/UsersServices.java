@@ -20,4 +20,9 @@ public class UsersServices {
         return list;
     }
 
+    public String deleteUserService(String id){
+        String response = repository.deleteUser(id);
+        return response;
+    }
+
 }

@@ -11,13 +11,18 @@ public class UsersController {
     private UsersServices service = new UsersServices();
   
     public String insertUser(UserDTO userDTO) {
-        service.InsertUserService(userDTO);
-        return "Usuario criado com sucesso";
+        String response = service.InsertUserService(userDTO);
+        return response;
     }
 
     public List<User> getUsers(){
        List<User> list = service.getUsersService();
        return list;
     
+    }
+
+    public String deleteUser(String id){ 
+        String response = service.deleteUserService(id);
+        return response;
     }
 }

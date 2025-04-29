@@ -30,9 +30,9 @@ public class UsersHandler implements HttpHandler {
 
                     String bodyString = new String(body.readAllBytes(), StandardCharsets.UTF_8);
                     UserDTO userDTO = gson.fromJson(bodyString, UserDTO.class);
-                    usersController.insertUser(userDTO);
+                    
 
-                    response = "Usuario criado com sucesso";
+                    response = usersController.insertUser(userDTO);
                     exchange.sendResponseHeaders(201, response.getBytes().length);
                     os.write(response.getBytes());
                     os.close();
@@ -47,6 +47,13 @@ public class UsersHandler implements HttpHandler {
                     os.write(response.getBytes());
                     os.close();
                     break;
+
+                case "DELETE":
+                     String path = exchange.getRequestURI().getPath();
+                     String[] pathParts = path.split("/");
+                     String id = pathParts[2];
+                    
+                     response = usersController.deleteUser(id);
                 default:
                     break;
             }
